@@ -2,11 +2,13 @@ import json
 import requests
 import os
 import shutil
+import sys
+
 
 def parse(url):
     # url = 'https://entertain.naver.com/photo/issue/1058865'
     url = url.replace("issue/", "issueItemList.json?cid=") + "&page="
-    print(url)
+    print("Downloading...")
     n = 0
     while True:
         response = requests.get(url + str(n))
@@ -28,4 +30,6 @@ def download(url):
             shutil.copyfileobj(r.raw, f)
 
 
-#parse("https://entertain.naver.com/photo/issue/1058865")
+if __name__ == "__main__":
+    link = sys.argv[1]
+    parse(link)
